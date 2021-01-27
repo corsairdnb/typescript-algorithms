@@ -1,4 +1,4 @@
-import LinkedList from '../LinkedList';
+import LinkedList from '../LinkedList.ts';
 
 describe('LinkedList', () => {
   it('should create empty linked list', () => {
@@ -142,9 +142,7 @@ describe('LinkedList', () => {
     const nodeValue1 = { value: 1, key: 'key1' };
     const nodeValue2 = { value: 2, key: 'key2' };
 
-    linkedList
-      .append(nodeValue1)
-      .prepend(nodeValue2);
+    linkedList.append(nodeValue1).prepend(nodeValue2);
 
     const nodeStringifier = (value) => `${value.key}:${value.value}`;
 
@@ -159,9 +157,7 @@ describe('LinkedList', () => {
     linkedList.append(1);
     expect(linkedList.find({ value: 1 })).toBeDefined();
 
-    linkedList
-      .append(2)
-      .append(3);
+    linkedList.append(2).append(3);
 
     const node = linkedList.find({ value: 2 });
 
@@ -209,7 +205,7 @@ describe('LinkedList', () => {
       .append({ value: 3, customValue: 'test3' });
 
     const node = linkedList.find({
-      value: { value: 2, customValue: 'test2' },
+      value: { value: 2, customValue: 'test2' }
     });
 
     expect(node).toBeDefined();
@@ -243,10 +239,7 @@ describe('LinkedList', () => {
     const linkedList = new LinkedList();
 
     // Add test values to linked list.
-    linkedList
-      .append(1)
-      .append(2)
-      .append(3);
+    linkedList.append(1).append(2).append(3);
 
     expect(linkedList.toString()).toBe('1,2,3');
     expect(linkedList.head.value).toBe(1);
