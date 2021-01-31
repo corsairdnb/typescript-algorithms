@@ -1,9 +1,17 @@
 import LinkedListNode from './LinkedListNode';
+import Comparator from './Comparator';
+import IComparator, { CompareFn } from './IComparator';
 
 export default class LinkedList<T> {
   public head: LinkedListNode<T> | null = null;
 
   public tail: LinkedListNode<T> | null = null;
+
+  public compare: IComparator<T>;
+
+  constructor(readonly compareFn?: CompareFn) {
+    this.compare = new Comparator<T>(compareFn);
+  }
 
   prepend(value: T): LinkedList<T> {
     const newNode = new LinkedListNode<T>(value, this.head);
@@ -30,8 +38,8 @@ export default class LinkedList<T> {
   }
 
   find<C extends (value?: T) => string>({
-    value = undefined,
-    callback = undefined
+    value,
+    callback
   }: {
     value?: T;
     callback?: C;
@@ -43,10 +51,10 @@ export default class LinkedList<T> {
     let currentNode: LinkedListNode<T> | null = this.head;
 
     while (currentNode) {
-      if (callback && callback(value)) {
+      if (callback && callback(currentNode.value)) {
         return currentNode;
       }
-      if (value !== undefined && currentNode.value === value) {
+      if (value !== undefined && this.compare.equals(currentNode.value, value)) {
         return currentNode;
       }
       currentNode = currentNode.next;
@@ -62,16 +70,18 @@ export default class LinkedList<T> {
 
     let deletedNode = null;
 
-    while (this.head?.value === value) {
+    while (this.compare.equals(this.head?.value, value)) {
       deletedNode = this.head;
-      this.head = this.head.next;
+      if (this.head) {
+        this.head = this.head.next;
+      }
     }
 
     let currentNode = this.head;
 
     if (currentNode !== null) {
       while (currentNode?.next) {
-        if (currentNode.next.value === value) {
+        if (this.compare.equals(currentNode.next.value, value)) {
           deletedNode = currentNode.next;
           currentNode.next = currentNode.next.next;
         } else {
@@ -80,7 +90,7 @@ export default class LinkedList<T> {
       }
     }
 
-    if (this.tail?.value === value) {
+    if (this.compare.equals(this.tail?.value, value)) {
       this.tail = currentNode;
     }
 
@@ -124,6 +134,29 @@ export default class LinkedList<T> {
     }
 
     return deleted;
+  }
+
+  reverse(): LinkedList<T> {
+    let currNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currNode) {
+      nextNode = currNode.next;
+      currNode.next = prevNode;
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+
+    this.tail = this.head;
+    this.head = prevNode;
+
+    return this;
+  }
+
+  fromArray(array: T[]): LinkedList<T> {
+    array.forEach((value) => this.append(value));
+    return this;
   }
 
   toArray(): LinkedListNode<T>[] {

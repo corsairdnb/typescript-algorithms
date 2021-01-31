@@ -5,7 +5,10 @@
     "airbnb",
     "prettier",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:import/warnings",
+    "plugin:import/errors"
   ],
   "plugins": ["jest", "prettier", "@typescript-eslint"],
   "env": {
@@ -17,6 +20,16 @@
     "no-lonely-if": "off",
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
-    "no-loop-func": "off"
+    "no-loop-func": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "off",
+        "jsx": "off",
+        "ts": "off",
+        "tsx": "off"
+      }
+    ]
   }
 }
