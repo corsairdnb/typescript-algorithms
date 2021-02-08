@@ -1,4 +1,4 @@
-import Queue from '../Queue';
+import Queue from '../Queue.ts';
 
 describe('Queue', () => {
   it('should create empty queue', () => {
