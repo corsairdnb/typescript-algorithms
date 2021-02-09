@@ -37,12 +37,12 @@ export default class LinkedList<T> {
     return this;
   }
 
-  find<C extends (value?: T) => string>({
+  find({
     value,
     callback
   }: {
     value?: T;
-    callback?: C;
+    callback?: (someValue: T) => boolean;
   }): LinkedListNode<T> | null {
     if (!this.head) {
       return null;
