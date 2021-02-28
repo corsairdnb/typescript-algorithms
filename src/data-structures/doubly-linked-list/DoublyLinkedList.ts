@@ -1,6 +1,6 @@
 import DoublyLinkedListNode from './DoublyLinkedListNode';
-import IComparator, { CompareFn } from '../linked-list/IComparator';
-import Comparator from '../linked-list/Comparator';
+import IComparator, { CompareFn } from '../../utils/comparator/IComparator';
+import Comparator from '../../utils/comparator/Comparator';
 
 export default class DoublyLinkedList<T> {
   public head: DoublyLinkedListNode<T> | null = null;

@@ -1,6 +1,6 @@
 import LinkedListNode from './LinkedListNode';
-import Comparator from './Comparator';
-import IComparator, { CompareFn } from './IComparator';
+import Comparator from '../../utils/comparator/Comparator';
+import IComparator, { CompareFn } from '../../utils/comparator/IComparator';
 
 export default class LinkedList<T> {
   public head: LinkedListNode<T> | null = null;
