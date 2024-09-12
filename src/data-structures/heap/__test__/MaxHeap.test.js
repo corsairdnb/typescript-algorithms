@@ -1,4 +1,4 @@
-import MaxHeap from '../MaxHeap';
+import MaxHeap from '../MaxHeap.ts';
 import Comparator from '../../../utils/comparator/Comparator';
 
 describe('MaxHeap', () => {

@@ -1,4 +1,4 @@
-import Heap from '../Heap';
+import Heap from '../Heap.ts';
 
 describe('Heap', () => {
   it('should not allow to create instance of the Heap directly', () => {
